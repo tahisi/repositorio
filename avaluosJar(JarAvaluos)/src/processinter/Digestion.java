@@ -1,0 +1,26 @@
+package processinter;
+
+
+import org.apache.commons.codec.digest.DigestUtils;
+
+
+
+public class Digestion {
+	
+	public static String GetSha1(byte[] archivo){	
+		return DigestUtils.sha1Hex(archivo);
+	}
+
+	public static String byteArrayToHexString(byte[] b) {
+		  String result = "";
+		  for (int i=0; i < b.length; i++) {
+		    result +=
+		          Integer.toString( ( b[i] & 0xff ) + 0x100, 16).substring( 1 );
+		  }
+		  return result;
+		}
+	
+	
+	
+	
+}
