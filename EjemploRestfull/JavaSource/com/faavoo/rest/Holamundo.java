@@ -8,7 +8,7 @@ import javax.ws.rs.core.MediaType;
 
 //import com.bbva.tdcempresarial.alta.controller.FlujoTdcEmpresarialController;
 
-@Path("/saludo")
+@Path("/saludoprueba")
 public class Holamundo {
     
     @GET
