@@ -1,13 +1,13 @@
 package com.bbva.didactic.test;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-
-import org.apache.commons.ssl.Base64;
-import org.json.JSONObject;
-
-import com.bbva.didactic.principal.SendDocumentDidactic;
+//
+//import java.io.File;
+//import java.io.FileInputStream;
+//import java.io.IOException;
+//
+//import org.apache.commons.ssl.Base64;
+//import org.json.JSONObject;
+//
+//import com.bbva.didactic.principal.SendDocumentDidactic;
 
 public class test {
 	
@@ -63,36 +63,36 @@ public class test {
 //		System.out.println(respuesta);
 //	}
 	
-	private static byte[] readBytesFromFile(String filePath) {
-
-        FileInputStream fileInputStream = null;
-        byte[] bytesArray = null;
-
-        try {
-
-            File file = new File(filePath);
-            bytesArray = new byte[(int) file.length()];
-
-            //read file into bytes[]
-            fileInputStream = new FileInputStream(file);
-            fileInputStream.read(bytesArray);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (fileInputStream != null) {
-                try {
-                    fileInputStream.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-
-        }
-
-        return bytesArray;
-
-    }
+//	private static byte[] readBytesFromFile(String filePath) {
+//
+//        FileInputStream fileInputStream = null;
+//        byte[] bytesArray = null;
+//
+//        try {
+//
+//            File file = new File(filePath);
+//            bytesArray = new byte[(int) file.length()];
+//
+//            //read file into bytes[]
+//            fileInputStream = new FileInputStream(file);
+//            fileInputStream.read(bytesArray);
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        } finally {
+//            if (fileInputStream != null) {
+//                try {
+//                    fileInputStream.close();
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//
+//        }
+//
+//        return bytesArray;
+//
+//    }
 	
 
 	

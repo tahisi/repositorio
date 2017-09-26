@@ -52,7 +52,7 @@ public void createPagina (Connection conn, BecasBean bean, Statement st) throws 
 			+ "CD_FOLIO, NB_ARCHIVO, NU_SIZE, NB_EXTENSION, NB_SHA1, TM_DIGITALIZACION , CD_USUARIO)  VALUES "
 			+ " ( "+ bean.getIdPagina()+" , "+bean.getIdVersion()+" , "+bean.getIdDocumento()+" , "+bean.getIdGabinete()+" , "
 			+ " "+ bean.getIdAplicacion()+" , '"+ bean.getFolioDig()+"' ,"
-			+ " '"+bean.getNombreArch()+"' , 2, '"+bean.getExtension()+"' , 'SHA1',  sysdate , '"+bean.getUsuario()+"' )";
+			+ " '"+bean.getNombreArch()+"' , "+bean.getSize()+", '"+bean.getExtension()+"' , '"+bean.getSha1()+"',  sysdate , '"+bean.getUsuario()+"' )";
 	System.out.println(query);
 	st.addBatch(query);
 	
