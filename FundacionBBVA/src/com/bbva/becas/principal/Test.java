@@ -2,8 +2,7 @@ package com.bbva.becas.principal;
 
 import java.io.IOException;
 
-
-
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class Test {
@@ -92,7 +91,7 @@ public class Test {
 	//}
 
 	}
-	public static JSONObject ConsultaDocto() {
+	public static JSONArray ConsultaDocto() {
 //String cadena = "{ "
 //		+ "\"tituloAplicacion\": \"BECAS\","
 //		+ "\"folio\": [{ "
@@ -109,7 +108,7 @@ String cadena = "{ "
 		+ " \"folio\": [   {\"folioDigitalizacion\": \"BECAS@G4C1D1V1\"} ],"
 		+ " \"atributos\": [ { \"campo\": \"opcion\", \"valor\": \"base64\"   } ]}";
 		System.out.println(cadena);
-		JSONObject respuesta = null;
+		JSONArray respuesta = null;
 		JSONObject jsonObj = new JSONObject(cadena);
 		respuesta=  GetDocument.buscaDoc(jsonObj);
 //		respuesta = sendFileOI(jsonObj);

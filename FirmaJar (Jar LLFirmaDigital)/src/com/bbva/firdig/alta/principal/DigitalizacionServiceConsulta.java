@@ -1,17 +1,19 @@
 package com.bbva.firdig.alta.principal;
 
-import java.util.HashMap;
-import java.util.Map;
+//import java.util.HashMap;
+//import java.util.Map;
 
-import org.apache.commons.ssl.Base64;
+//import org.apache.commons.ssl.Base64;
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+//import com.google.gson.JsonElement;
 
 import syc.bbva.firdig.ws.DigitalizacionService;
 import syc.bbva.firdig.ws.DigitalizacionServiceDelegate;
 
 public class DigitalizacionServiceConsulta {
-public static   JSONObject getFile(JSONObject Documento){
+public static   JSONArray getFile(JSONObject Documento){
 		
 		String aplicacion 		= Documento.get("tituloAplicacion").toString();
 //		String folio 			= Documento.getJSONArray("atributos");
@@ -21,9 +23,10 @@ public static   JSONObject getFile(JSONObject Documento){
 		String listaValores		= "";
 		String respuesta		= null;
 		JSONObject respuestaASO = new JSONObject();
-		JSONArray exito 		= new JSONArray();
+		JSONArray  resp 		= new JSONArray();
+		JSONObject exito 		= new JSONObject();
 		JSONObject error 		= new JSONObject();
-		Map<String, Object> maps = new HashMap<String, Object>();
+//		Map<String, Object> maps = new HashMap<String, Object>();
 		String nb_atributo  = null;
 	if (aplicacion.equalsIgnoreCase("FIRDIG")){
 
@@ -71,12 +74,17 @@ public static   JSONObject getFile(JSONObject Documento){
 		
 	}else{
 
-		maps.put("url", "");
-		maps.put("archivo",respuesta);
+		exito.put("url", "");
+		exito.put("archivo",respuesta);
 
-		exito.put(0, maps);
-		respuestaASO.put("exito", exito);
-		respuestaASO.put("error", error);
+//		exito.put(0, maps);
+		if(exito.length() !=0  ){
+			respuestaASO.put("exito", exito);
+		}
+		if (error.length()!= 0){
+			respuestaASO.put("error", error);
+		}
+		resp.put(respuestaASO);
 	}
 		
 	}else{
@@ -85,36 +93,37 @@ public static   JSONObject getFile(JSONObject Documento){
 		error.put("mensaje", "Error");
 		respuestaASO.put("exito", exito);
 		respuestaASO.put("error", error);
+		resp.put(respuestaASO);
 	}
-	return  respuestaASO;
+	return  resp;
 	}
-//public static void main (String args[]){
-//
-//String cadena = "{ "
-//		+ "\"tituloAplicacion\": \"FIRDIG\","
-//		+ "\"folio\": [{ "
-//		+ "                   \"folioDigitalizacion\" : \"0\", "
-//		+ "}], "
-//		+ "\"atributos\": [{ "
-//		+ "\"campo\": \"tipoOperacion\", "
-//		+ "\"valor\": \"getFirmaCliente\" "
-//		+ "}, "
-//		+"{ "
-//		+ "\"campo\": \"numeroCliente\", "
-//		+ "\"valor\": \"J0819464\" "
-//		+ "}, "
-//		+"{ "
-//		+ "\"campo\": \"claveDocumento\", "
-//		+ "\"valor\": \"255\" "
-//		+ "} "
-//		+ "] }";
-//		System.out.println(cadena);
-//		JSONObject respuesta = null;
-//		JSONObject jsonObj = new JSONObject(cadena);
-//		respuesta=  getFile(jsonObj);
-////		respuesta = sendFileOI(jsonObj);
-//		System.out.println(respuesta);
-//		
-////		return respuesta;
-//	}
+public static void main (String args[]){
+
+String cadena = "{ "
+		+ "\"tituloAplicacion\": \"FIRDIG\","
+		+ "\"folio\": [{ "
+		+ "                   \"folioDigitalizacion\" : \"0\", "
+		+ "}], "
+		+ "\"atributos\": [{ "
+		+ "\"campo\": \"tipoOperacion\", "
+		+ "\"valor\": \"getFirmaCliente\" "
+		+ "}, "
+		+"{ "
+		+ "\"campo\": \"numeroCliente\", "
+		+ "\"valor\": \"J0819464\" "
+		+ "}, "
+		+"{ "
+		+ "\"campo\": \"claveDocumento\", "
+		+ "\"valor\": \"255\" "
+		+ "} "
+		+ "] }";
+		System.out.println(cadena);
+		JSONArray respuesta = new JSONArray();
+		JSONObject jsonObj = new JSONObject(cadena);
+		respuesta=  getFile(jsonObj);
+//		respuesta = sendFileOI(jsonObj);
+		System.out.println(respuesta);
+		
+//		return respuesta;
+	}
 }

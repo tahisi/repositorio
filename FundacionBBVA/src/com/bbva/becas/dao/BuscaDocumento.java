@@ -13,12 +13,12 @@ import org.json.JSONObject;
 
 public class BuscaDocumento {
 	private static Logger log = Logger.getLogger(BuscaDocumento.class);
-	public    JSONObject downloadfile(JSONObject consulta) {
+	public    JSONArray downloadfile(JSONObject consulta) {
 		
 	String aplicacion 		= consulta.get("tituloAplicacion").toString();
 	JSONArray arr 			= consulta.getJSONArray("atributos");
 	JSONArray foliosArray	= consulta.getJSONArray("folio");
-	JSONObject respuesta   	= null;
+	JSONArray respuesta   	= new JSONArray();
 
 	Map<String, Object> maps = new HashMap<String, Object>();
 	Map<String, Object> folios = new HashMap<String, Object>();
@@ -59,7 +59,7 @@ public class BuscaDocumento {
 				e.printStackTrace();
 			}
 		}
-
+		System.out.println("Terminando proceso, regresando respuesta" + respuesta);
 	}
 	return respuesta;
 

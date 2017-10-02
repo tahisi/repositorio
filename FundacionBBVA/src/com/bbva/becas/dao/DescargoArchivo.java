@@ -17,6 +17,8 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.bbva.becas.parametros.ParametrosBecas;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.syc.bancomer.dsmngr.DataSourceManager;
 
 import com.syc.rig.client.RigClient;
@@ -31,11 +33,12 @@ public class DescargoArchivo extends DataSourceManager {
 	
 	
 
-	public JSONObject DowFile(String folio) throws Exception {
+	public JSONArray DowFile(String folio) throws Exception {
 		Connection conn = null;
 		RigClient  h 	= null 	;				
 		JSONObject respuestaASO = new JSONObject();
-		JSONArray exito 		= new JSONArray();
+		JSONObject exito 		= new JSONObject();
+		JSONArray resp 			= new JSONArray();
 		Map<String, Object> maps = new HashMap<String, Object>();
 		Map<String, Object> mapsError = new HashMap<String, Object>();
 		List <String> folioID = new ArrayList<String>();
@@ -68,11 +71,13 @@ public class DescargoArchivo extends DataSourceManager {
 					h.download("becas", folioID.get(0), output);
 					ByteArrayOutputStream bos = (ByteArrayOutputStream)output;
 					String stringToStore = Base64.encodeBase64String(bos.toByteArray());// el DatosBuket[2] y DatosBuket[3]  corresponde a informacion que regresa archivin( _signature y sha1N )
-					maps.put("url", "");
-					maps.put("archivo", stringToStore.replace("\n", "").replace("\r", ""));
-
-					exito.put(0, maps);
-
+					exito.put("url", "");
+					exito.put("archivo", stringToStore.replace("\n", "").replace("\r", ""));
+//					exito.put("url", folioID.toString());
+//					exito.put("archivo","");
+					
+//					exito.put(0, maps);
+					
 					}catch (RigClientException e) {
 						e.printStackTrace();
 					}
@@ -97,8 +102,16 @@ public class DescargoArchivo extends DataSourceManager {
 			mapsError.put("causa", e.getMessage()); 
 			log.info("Error: " , e );
 		}finally{
-			respuestaASO.put("exito", exito);
-			respuestaASO.put("error", mapsError);
+//			respuestaASO.put("exito", exito);
+//			respuestaASO.put("error", mapsError);
+//			resp.put(respuestaASO);
+			if(exito.length() !=0  ){
+				respuestaASO.put("exito", exito);
+			}
+			if (mapsError.size()!= 0){
+				respuestaASO.put("error", mapsError);
+			}
+				resp.put(respuestaASO);
 			if(conn!=null)
 				try {
 					conn.close();
@@ -109,19 +122,19 @@ public class DescargoArchivo extends DataSourceManager {
 			conn = null;
 		}
 
-
-		return respuestaASO; // RETORNO LA RESPUESTA DE LA DESCARGA.
+		System.out.println("ANTES DE RETURN "+resp);
+		return resp; // RETORNO LA RESPUESTA DE LA DESCARGA.
 	}
 	
-	
-	public JSONObject Folios(String folio) throws Exception {
+	public JSONArray Folios(String folio) throws Exception {
 		Connection conn = null;			
 		JSONObject respuestaASO = new JSONObject();
-		JSONArray exito 		= new JSONArray();
-		Map<String, Object> maps = new HashMap<String, Object>();
+		JSONObject exito 		= new JSONObject();
+		JsonElement maps = new JsonObject();
 		Map<String, Object> mapsError = new HashMap<String, Object>();
 		List<String> folioID = new ArrayList<String>();
 		String ListaFolios = "";
+		JSONArray resp = new JSONArray();
 		try{
 			conn 				= AlmacenaDocto.Buscaconexion();
 				try{
@@ -133,11 +146,11 @@ public class DescargoArchivo extends DataSourceManager {
 					}
 					try{
 					
-					maps.put("url", folioID);
-					maps.put("archivo","");
+					exito.put("url", folioID.toString());
+					exito.put("archivo","");
 
-					exito.put(0, maps);
-
+//					exito.put(0, maps);
+					
 					}catch (RigClientException e) {
 						e.printStackTrace();
 					}
@@ -162,8 +175,13 @@ public class DescargoArchivo extends DataSourceManager {
 			mapsError.put("causa", e.getMessage()); 
 			log.info("Error: " , e );
 		}finally{
-			respuestaASO.put("exito", maps);
+			if(exito.length() !=0  ){
+			respuestaASO.put("exito", exito);
+			}
+			if (mapsError.size()!= 0){
 			respuestaASO.put("error", mapsError);
+			}
+			resp.put(respuestaASO);
 			if(conn!=null)
 				try {
 					conn.close();
@@ -175,7 +193,7 @@ public class DescargoArchivo extends DataSourceManager {
 		}
 
 
-		return respuestaASO; // RETORNO LA RESPUESTA DE LA DESCARGA.
+		return resp; // RETORNO LA RESPUESTA DE LA DESCARGA.
 	}
 	
 	public List<String>  buscaID(Connection conn, String folio) throws SQLException{

@@ -20,10 +20,10 @@ import com.syc.rig.client.RigClient;
 
 public class GetDocumentDidactic {
 	private static Logger log = Logger.getLogger(GetDocumentDidactic.class);
-	public  static JSONObject buscaDoc(JSONObject entrada) 
+	public  static JSONArray buscaDoc(JSONObject entrada) 
 	{
 
-		JSONObject respuesta 	= new JSONObject();
+		JSONArray respuesta 	= new JSONArray();
 		log.info("GetDocument ");
 		respuesta= downloadfile(entrada);	
 		
@@ -33,13 +33,12 @@ public class GetDocumentDidactic {
 	
 	
 	
-	public  static  JSONObject downloadfile(JSONObject consulta) {
+	public  static  JSONArray downloadfile(JSONObject consulta) {
 		
 		String aplicacion 		= consulta.get("tituloAplicacion").toString();
 		JSONArray arr 			= consulta.getJSONArray("atributos");
 		JSONArray foliosArray	= consulta.getJSONArray("folio");
-		JSONObject respuesta   	=  new JSONObject();
-
+		JSONArray respuesta   	=  new JSONArray();
 		Map<String, Object> maps = new HashMap<String, Object>();
 		Map<String, Object> folios = new HashMap<String, Object>();
 		
@@ -82,12 +81,13 @@ public class GetDocumentDidactic {
 
 	}
 	
-	public static JSONObject DowFile(String folio) throws Exception {
+	public static JSONArray DowFile(String folio) throws Exception {
 
 		RigClient  h 	= null 	;				
 		JSONObject respuestaASO = new JSONObject();
-		JSONArray exito 		= new JSONArray();
-		Map<String, Object> maps = new HashMap<String, Object>();
+		JSONObject exito 		= new JSONObject();
+		JSONArray resp 		= new JSONArray();
+//		Map<String, Object> maps = new HashMap<String, Object>();
 		Map<String, Object> mapsError = new HashMap<String, Object>();
 
 		try{
@@ -108,9 +108,9 @@ public class GetDocumentDidactic {
 					h.download("didactic", folio, output);
 					ByteArrayOutputStream bos = (ByteArrayOutputStream)output;
 					String stringToStore = Base64.encodeBase64String(bos.toByteArray());// el DatosBuket[2] y DatosBuket[3]  corresponde a informacion que regresa archivin( _signature y sha1N )
-					maps.put("url", "");
-					maps.put("archivo", stringToStore.replace("\n", "").replace("\r", ""));
-					exito.put(0, maps);
+					exito.put("url", "");
+					exito.put("archivo", stringToStore.replace("\n", "").replace("\r", ""));
+					//exito.put(0, maps);
 
 				}catch(Exception e){
 					log.info("ERROR AL DESCARGAR DE ARCHIVING " , e);
@@ -126,13 +126,17 @@ public class GetDocumentDidactic {
 
 		
 		}finally{
+			if (exito.length() != 0){
 			respuestaASO.put("exito", exito);
+			}
+			if(mapsError.size() != 0){
 			respuestaASO.put("error", mapsError);
-			
+			}
+			resp.put(respuestaASO);
 		}
 
 
-		return respuestaASO; // RETORNO LA RESPUESTA DE LA DESCARGA.
+		return resp; // RETORNO LA RESPUESTA DE LA DESCARGA.
 	}
 	public static void main (String args[]){
 
@@ -147,7 +151,7 @@ String cadena = "{ "
 		+ "} "
 		+ "] }";
 		System.out.println(cadena);
-		JSONObject respuesta = null;
+		JSONArray respuesta = null;
 		JSONObject jsonObj = new JSONObject(cadena);
 		respuesta=  buscaDoc(jsonObj);
 //		respuesta = sendFileOI(jsonObj);
