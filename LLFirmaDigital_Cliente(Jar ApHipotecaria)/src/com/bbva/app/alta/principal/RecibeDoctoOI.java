@@ -107,7 +107,7 @@ public class RecibeDoctoOI {
 			
 			String mensaje  = null;
 			if (!folio) {
-				mensaje   = "folioPreAut";
+				mensaje   = "folioPre" + folio;
 			}
 			else if(!cveD){
 				mensaje = "cveDocto";

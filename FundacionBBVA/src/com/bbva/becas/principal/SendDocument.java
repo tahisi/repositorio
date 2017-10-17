@@ -28,7 +28,7 @@ public class SendDocument {
 			JSONArray atributos = new JSONArray();
 			JSONObject codigoError = new JSONObject();
 			JSONObject codigoExito = new JSONObject();
-			
+			System.out.println("RECIBIENDO ARCHIVO " + informacion.toString() );
 			Map<String, Object> map = new HashMap<String, Object>();
 			try{
 				titulo_aplicacion = (String) informacion.get("tituloAplicacion");
@@ -39,7 +39,7 @@ public class SendDocument {
 					//Recorremos los atributos para mapearlos.
 					for(int i=0; i<atributos.length(); i++){
 						atributo = atributos.getJSONObject(i);
-						log.info("Insertando al map (CAMPO): " + atributo.getString("campo").toString()
+						System.out.println("Insertando al map (CAMPO): " + atributo.getString("campo").toString()
 								+ ", (VALOR): " + atributo.getString("valor").toString());
 						
 						map.put(atributo.getString("campo").toString(), atributo.getString("valor").toString());
@@ -47,7 +47,7 @@ public class SendDocument {
 	
 					
 					BecasBean becas = new  BecasBean();
-						log.info("Llenando BeanBecas");
+					 System.out.println("Llenando BeanBecas");
 						becas.setIdAplicacion(1);
 						becas.setNumeroCliente((String)map.get(atributosFB.numeroCliente.toString()));
 						becas.setNumeroCuenta((String)map.get(atributosFB.numeroCuenta.toString()));
@@ -69,7 +69,7 @@ public class SendDocument {
 											
 					
 				} else {
-					log.info("El titulo de la aplicacion no corresponde a nuestro flujo: " + titulo_aplicacion);
+					System.out.println("El titulo de la aplicacion no corresponde a nuestro flujo: " + titulo_aplicacion);
 					codigoError.put("codigo","0");
 					codigoError.put("mensaje","Aplicacion no valida");
 					codigoError.put("causa","Aplicacion diferente a FABRICA");
@@ -78,7 +78,7 @@ public class SendDocument {
 					respuesta.put("error", codigoError);
 				}	
 			} catch(NullPointerException  e){
-				log.error("Error al procesar la informacion: " + e.getCause());
+				System.out.println("Error al procesar la informacion: " + e.getCause());
 				codigoError.put("codigo","0");
 				codigoError.put("mensaje","Parametros nulos");
 				codigoError.put("causa","Parametros nulos");
@@ -86,7 +86,7 @@ public class SendDocument {
 				respuesta.put("exito", codigoExito);
 				respuesta.put("error", codigoError);
 			} catch(JSONException  e){
-				log.error("Error al procesar la informacion: " + e.getMessage());
+				System.out.println("Error al procesar la informacion: " + e.getMessage());
 				codigoError.put("codigo","0");
 				codigoError.put("mensaje",e.getMessage());
 				codigoError.put("causa","Error en la estructura del JSON");
@@ -94,10 +94,10 @@ public class SendDocument {
 				respuesta.put("exito", codigoExito);
 				respuesta.put("error", codigoError);
 			} catch(Exception e){
-				log.error("Error al procesar la informacion: " + e.getCause());
+				e.printStackTrace();
 				codigoError.put("codigo","0");
-				codigoError.put("mensaje","Error desconocido");
-				codigoError.put("causa","Error desconocido");
+				codigoError.put("mensaje","Error desconocido BECAS");
+				codigoError.put("causa",e.getCause());
 				
 				respuesta.put("exito", codigoExito);
 				respuesta.put("error", codigoError);

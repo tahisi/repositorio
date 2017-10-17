@@ -17,5 +17,6 @@
 	<classpathentry kind="lib" path="C:/jars/ojdbc14.jar"/>
 	<classpathentry kind="lib" path="C:/jars/rig-client-fd-0.5.0.jar"/>
 	<classpathentry kind="lib" path="C:/jars/unirest-java-1.4.8.jar"/>
+	<classpathentry kind="lib" path="C:/jars/jdnipia.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

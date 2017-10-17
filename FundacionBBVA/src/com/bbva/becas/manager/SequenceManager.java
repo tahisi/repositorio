@@ -12,8 +12,7 @@ import org.apache.log4j.Logger;
 import com.bbva.becas.bean.Sequence;
 import com.bbva.becas.dao.AlmacenaDocto;
 import com.bbva.becas.parametros.ParametrosBecas;
-import com.syc.bancomer.dsmngr.DataSourceManager;
-import com.syc.bancomer.jndi.TraeJndi;
+import com.bancomer.pia.dsmngr.*;
 
 
 
@@ -227,10 +226,9 @@ public class SequenceManager extends DataSourceManager {
 		return retVal;
 	}
 
-	public int nextValue(int cd_aplicacion) throws SQLException {
+	public int nextValue(Connection conn, int cd_aplicacion) throws SQLException {
 
 		int retVal = -1;
-		Connection conn = null;
 		PreparedStatement psUpdate = null, psSelect = null;
 		ResultSet rs = null;
 
@@ -238,11 +236,11 @@ public class SequenceManager extends DataSourceManager {
 //			conn = getConnection();
 			
 //			conn = AlmacenaDocto.Buscaconexion();
-			if ("P".equals(ParametrosBecas.AMBIENTE)) {
-				conn = getConnectionStatic();
-			}else if("T".equals(ParametrosBecas.AMBIENTE)){
-				conn 				= AlmacenaDocto.Buscaconexion();
-			}
+//			if ("P".equals(ParametrosBecas.AMBIENTE)) {
+//				conn = getConnectionStatic();
+//			}else if("T".equals(ParametrosBecas.AMBIENTE)){
+//				conn 				= AlmacenaDocto.Buscaconexion();
+//			}
 			// Bloqueamos el registro incrementando al nuevo valor
 			psUpdate = conn.prepareStatement("UPDATE TLMS036_SEQUENCE SET cd_value = cd_value + 1 WHERE cd_aplicacion = ?");
 			psUpdate.setInt(1, cd_aplicacion);
@@ -286,12 +284,7 @@ public class SequenceManager extends DataSourceManager {
 				log.warn("Cerrando PreparedStatement", e);
 			}
 
-			try {
-				if (conn != null)
-					conn.close();
-			} catch (Exception e) {
-				log.warn("Cerrando conexion a base de datos", e);
-			}
+			
 
 			rs = null;
 			psSelect = null;
@@ -302,21 +295,16 @@ public class SequenceManager extends DataSourceManager {
 		return retVal;
 	}
 
-	public int nextValue(String tableName, String columnName, int cd_aplicacion) throws SQLException {
+	public int nextValue(Connection conn, String tableName, String columnName, int cd_aplicacion) throws SQLException {
 
 		int maxValue = -1;
-		Connection conn = null;
+		
 		try {
 			synchronized (seqMangr) {
-				maxValue = nextValue(cd_aplicacion);
+				maxValue = nextValue(conn,cd_aplicacion);
 				// Si no existe la secuencia, se crea
 				if (maxValue == -1) {
-//					conn = getConnection();
-					if ("P".equals(ParametrosBecas.AMBIENTE)) {
-						conn = getConnectionStatic();
-					}else if("T".equals(ParametrosBecas.AMBIENTE)){
-						conn = AlmacenaDocto.Buscaconexion();
-					}
+//					conn = getConnection()
 					
 					// Busca el maximo de tableName en columnName
 					maxValue = maxValue(conn, tableName, columnName, cd_aplicacion);
@@ -325,7 +313,7 @@ public class SequenceManager extends DataSourceManager {
 					// Se hacen permanentes los cambios
 					conn.commit();
 					// Se recupera el siguiente valor de la secuencia
-					maxValue = nextValue(cd_aplicacion);
+					maxValue = nextValue(conn,cd_aplicacion);
 				}
 			}
 		} catch (Exception exc) {

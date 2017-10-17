@@ -56,21 +56,21 @@ public static   JSONArray getFile(JSONObject Documento){
 		error.put("codigo", "003");
 		error.put("causa", respuesta);
 		error.put("mensaje", "Error");
-		respuestaASO.put("exito", exito);
+//		respuestaASO.put("exito", exito);
 		respuestaASO.put("error", error);
 	}else if(respuesta.contains("parámetro")){
 		error.put("codigo", "002");
 		error.put("causa", respuesta);
 		error.put("mensaje", "Error");
-		respuestaASO.put("exito", exito);
+//		respuestaASO.put("exito", exito);
 		respuestaASO.put("error", error);
 	}else if(respuesta.contains("<resp status='error'>")){
 		error.put("codigo", "005");
 		error.put("causa", "Error");
 		error.put("mensaje", respuesta);
-		respuestaASO.put("exito", exito);
+//		respuestaASO.put("exito", exito);
 		respuestaASO.put("error", error);
-	
+		resp.put(respuestaASO);
 		
 	}else{
 
@@ -91,7 +91,7 @@ public static   JSONArray getFile(JSONObject Documento){
 		error.put("codigo", "005");
 		error.put("causa", "TituloAplicacion no definido" );
 		error.put("mensaje", "Error");
-		respuestaASO.put("exito", exito);
+//		respuestaASO.put("exito", exito);
 		respuestaASO.put("error", error);
 		resp.put(respuestaASO);
 	}
@@ -110,7 +110,7 @@ String cadena = "{ "
 		+ "}, "
 		+"{ "
 		+ "\"campo\": \"numeroCliente\", "
-		+ "\"valor\": \"J0819464\" "
+		+ "\"valor\": \"00516279\" "
 		+ "}, "
 		+"{ "
 		+ "\"campo\": \"claveDocumento\", "

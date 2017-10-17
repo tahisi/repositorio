@@ -61,7 +61,7 @@ public class ExpedienteDao {
 	public int secuenceExpediente (Connection conn, BecasBean becas, Statement st) throws SQLException{
 		int idExpediente = -1;
 
-		idExpediente = 	nextValExpediente(becas.getIdAplicacion());
+		idExpediente = 	nextValExpediente(conn, becas.getIdAplicacion());
 		becas.setIdGabinete(idExpediente);
 	 	createExpediente(conn, becas,st);
 		
@@ -70,9 +70,9 @@ public class ExpedienteDao {
 	}
 	
 	
-	private static synchronized int nextValExpediente ( int cd_aplicacion) throws SQLException{			
+	private static synchronized int nextValExpediente (Connection conn, int cd_aplicacion) throws SQLException{			
 			String  titulo_aplicacion = "TLMS032_EXPEDIENTE";
-			return SequenceManager.getInstance().nextValue(format(titulo_aplicacion), "cd_expediente",cd_aplicacion);
+			return SequenceManager.getInstance().nextValue(conn, format(titulo_aplicacion), "cd_expediente",cd_aplicacion);
 		
 	}
 	

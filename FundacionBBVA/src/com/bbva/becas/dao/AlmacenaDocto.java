@@ -1,7 +1,5 @@
 package com.bbva.becas.dao;
 
-import static java.lang.String.format;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -15,14 +13,14 @@ import org.json.JSONObject;
 import com.bbva.becas.archiving.MapArchiving;
 import com.bbva.becas.bean.BecasBean;
 import com.bbva.becas.parametros.ParametrosBecas;
-import com.syc.bancomer.dsmngr.DataSourceManager;
+import com.bancomer.pia.dsmngr.*;
 import com.syc.rig.client.RigClient;
-import com.syc.rig.client.RigClientException;
+
 
 public class AlmacenaDocto extends DataSourceManager {
 	
 	public JSONObject addFile (BecasBean becas, byte[] archivo) throws Exception{
-		
+		System.out.println("ADDFILE ");
 		Connection conn 	= null;
 		RigClient  h 		= null; 	
 		String folio  		= null;
@@ -37,7 +35,7 @@ public class AlmacenaDocto extends DataSourceManager {
 		}else if("T".equals(ParametrosBecas.AMBIENTE)){
 			conn 				= Buscaconexion();
 		}
-		
+		System.out.println("CEANDO EXPEDIENTE");
 		Statement st 		= conn.createStatement();
 		
 		becas 				= exp.idExpedinte(conn, becas, st);
@@ -76,13 +74,13 @@ public class AlmacenaDocto extends DataSourceManager {
 						folio = "BECAS@G"+becas.getIdGabinete()+"C1D"+becas.getIdDocumento()+"V"+becas.getIdVersion();  
 						exito.put("folioDigitalizacion", folio);
 						respuestaASO.put("exito", exito);
-						respuestaASO.put("error", error);
+//						respuestaASO.put("error", error);
 					}else {
 						
 						folio = "Pagina " + becas.getIdPagina(); 
 						exito.put("folioDigitalizacion", folio);
 						respuestaASO.put("exito", exito);
-						respuestaASO.put("error", error);
+//						respuestaASO.put("error", error);
 					}
 					try{
 					st.executeBatch();
@@ -106,7 +104,7 @@ public class AlmacenaDocto extends DataSourceManager {
 						error.put("codigo", "005");
 						error.put("causa", "Error Transaccional");
 						error.put("mensaje", json.get("error").toString().replace("[","").replace("]",""));
-						respuestaASO.put("exito", exito);
+//						respuestaASO.put("exito", exito);
 						respuestaASO.put("error", error);
 						
 					}
@@ -115,7 +113,7 @@ public class AlmacenaDocto extends DataSourceManager {
 			error.put("codigo", "005");
 			error.put("causa", "Error Transaccional");
 			error.put("mensaje", "Error al almacenar en base de datos");
-			respuestaASO.put("exito", exito);
+//			respuestaASO.put("exito", exito);
 			respuestaASO.put("error", error);
 			
 		}

@@ -19,7 +19,7 @@ import org.json.JSONObject;
 import com.bbva.becas.parametros.ParametrosBecas;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.syc.bancomer.dsmngr.DataSourceManager;
+import com.bancomer.pia.dsmngr.*;
 
 import com.syc.rig.client.RigClient;
 import com.syc.rig.client.RigClientException;
@@ -54,11 +54,14 @@ public class DescargoArchivo extends DataSourceManager {
 					  e.printStackTrace();
 				}
 			}
-			System.out.println("Entrando a hacer Conexion a base de datods");
+			
+			log.info("Entrando a hacer Conexion a base de datods");
+			if ("T".equalsIgnoreCase(ParametrosBecas.AMBIENTE)){
 			conn 				= AlmacenaDocto.Buscaconexion();
-			
-			//conn = getConnectionStatic();
-			
+			}
+			else if("P".equalsIgnoreCase(ParametrosBecas.AMBIENTE)){
+			conn = DataSourceManager.getConnectionStatic();
+			}
 	
 
 				OutputStream output = new ByteArrayOutputStream();
@@ -140,13 +143,16 @@ public class DescargoArchivo extends DataSourceManager {
 				try{
 					folioID = buscaID(conn, folio);
 					for (int i = 0 ; i<= folioID.size()-1; i++ ){
-					ListaFolios = 	folioID.get(i) ;
-					if(i==folioID.size())
-						ListaFolios = ListaFolios + ",";
+					
+					if(i<folioID.size()-1)
+						ListaFolios = ListaFolios + folioID.get(i) + ParametrosBecas.separador;
+					if(i==folioID.size()-1)
+					ListaFolios =ListaFolios + folioID.get(i);
 					}
+					
 					try{
 					
-					exito.put("url", folioID.toString());
+					exito.put("url", ParametrosBecas.urlVisorArchiving[ParametrosBecas.entorno] + ListaFolios);
 					exito.put("archivo","");
 
 //					exito.put(0, maps);

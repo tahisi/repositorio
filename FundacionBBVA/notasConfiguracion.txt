@@ -1,0 +1,14 @@
+################ NOTAS DE CONFIGURACION ###############
+
+1. Modificar en  ParametrosBecas.java
+
+		- AMBIENTE 
+			T -> CONEXION DIRECTA ()
+			P -> CONEXION CONEXION POR JDNI
+			
+		- AMBIENTE ARCHIVING
+			T -> TEST
+			P -> PRODUCCION
+			
+	
+		

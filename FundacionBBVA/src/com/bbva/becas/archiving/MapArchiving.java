@@ -23,13 +23,13 @@ public class MapArchiving {
 		metadata.put("p", bean.getIdPagina());      //id pagina
 		metadata.put("f", bean.getFolioDig());      //folio Digitalizacion  
 		metadata.put("cd", bean.getCveDoc());		//clave del Documento
-		metadata.put("nd", bean.getNombreDocto());		//clave del Documento
+		metadata.put("nd", quitaSignos(bean.getNombreDocto()));		//clave del Documento
 		metadata.put("u", bean.getUsuario());                  //usuario
 		metadata.put("fd", date);            //fecha
 		metadata.put("e", bean.getExtension());                  //extension
 		metadata.put("s", bean.getSize()); //tamaño archivo
 		metadata.put("sha1N", bean.getSha1());   //Digestion SHA1 del Archivo
-		metadata.put("n", bean.getNombreArch());
+		metadata.put("n", quitaSignos(bean.getNombreArch()));
 		metadata.put("nc", bean.getNumeroCliente());
 		metadata.put("cu", bean.getNumeroCuenta());
 		metadata.put("cr", bean.getCr());
@@ -41,5 +41,12 @@ public class MapArchiving {
 		return metadata;
 		
 	}
+	
+	 public static String quitaSignos(String cadena) {
+		 String response = null;
+		 if (cadena != null)
+		 response = cadena.replaceAll("[^\\dA-Za-z. ]", "");
+		 return response;
+		 }
 
 }

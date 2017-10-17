@@ -143,7 +143,7 @@ public class Principal {
                        			
 
                        				try {
-                       					System.out.println(alta);
+//                       					System.out.println(alta);
                        					HttpClient client = new fd.org.apache.http.impl.client.DefaultHttpClient();
                        					HttpPost post = new HttpPost(uri);
 
@@ -160,12 +160,13 @@ public class Principal {
                        					String line = "";
                        					while ((line=br.readLine()) != null) {
                        						JSONObject jsonObj = new JSONObject(line);
-                       						System.out.println(jsonObj);
+//                       						System.out.println(jsonObj);
                        						String folio ="";
                        						String exito = (String) jsonObj.get("exito").toString();
                        						String error = (String) jsonObj.get("error").toString();
                        						if(!exito.equals(""))
                        						 folio= new JSONObject(exito).getString("folioDigitalizacion");
+                       						System.out.println(folio);
                        						if(ultima.equals("true")){
                        						cadena = cadena + "|"+ folio +"|" + error;
                        						salidawr.write( cadena);
