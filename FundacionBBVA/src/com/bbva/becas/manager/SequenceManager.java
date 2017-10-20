@@ -324,14 +324,14 @@ public class SequenceManager extends DataSourceManager {
 			}
 			throw new SQLException(exc);
 		} finally {
-			if (conn != null)
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					log.warn("Cerrando conexion a base de datos", e);
-				}
+//			if (conn != null)
+//				try {
+//					conn.close();
+//				} catch (SQLException e) {
+//					log.warn("Cerrando conexion a base de datos", e);
+//				}
 
-			conn = null;
+//			conn = null;
 		}
 
 		return maxValue;

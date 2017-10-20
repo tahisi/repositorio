@@ -6,10 +6,10 @@ public class ParametrosBecas {
 
 		public static final int entorno  = 0 ; // 0 TEST , 1 Produccion
 		
-		public static String[] urlVisorArchiving= { "http://150.100.22.50:4200/outerview?becas=",
+		public static String[] urlVisorArchiving= { "http://150.100.22.50:4200/#/outerview/get?becas=",
 		"URL PRODUCCION" };
 		
-		public static final String separador ="-";
+		public static final String separador ="%2C";
 
 /********************************************************************************************************
  ********************************************** VARIABLES *********************************************** 

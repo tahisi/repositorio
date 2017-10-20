@@ -65,7 +65,7 @@ public abstract class DataSourceManager extends Thread {
 	}
 
 	public static Connection getConnectionStatic() throws SQLException {
-		System.out.println("ENTRANDO A HACER CONEXION");
+		System.out.println("jdbc/pia");
 		if (dsm == null)
 			dsm = new DataSourceManager() {
 			};

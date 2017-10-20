@@ -27,8 +27,8 @@ public class RecibeContratoService extends Service {
 					.getResource(".");
 			url = new URL(
 					baseUrl,
-//					"http://150.250.235.63:1446/LLFirmaDigital/RecibeContratoService/WEB-INF/wsdl/RecibeContratoService.wsdl");
-					"http://150.250.234.123:36081/LLFirmaDigital/RecibeContratoService/WEB-INF/wsdl/RecibeContratoService.wsdl");
+					"http://150.250.235.63:1446/LLFirmaDigital/RecibeContratoService/WEB-INF/wsdl/RecibeContratoService.wsdl");
+//					"http://150.250.234.123:36081/LLFirmaDigital/RecibeContratoService/WEB-INF/wsdl/RecibeContratoService.wsdl");
 //					"http://150.100.43.176:7051/LLFirmaDigital/RecibeContratoService/WEB-INF/wsdl/RecibeContratoService.wsdl");
 		} catch (MalformedURLException e) {
 			logger.warning("Failed to create URL for the wsdl Location: 'http://150.100.43.176:7051/LLFirmaDigital/RecibeContratoService/WEB-INF/wsdl/RecibeContratoService.wsdl', retrying as a local file");

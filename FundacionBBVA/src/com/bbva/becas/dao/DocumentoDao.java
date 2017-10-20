@@ -40,7 +40,7 @@ public class DocumentoDao {
 			
 			
 		}else{
-			becas.setIdDocumento(maxDoc(conn, becas.getIdGabinete())); 
+			becas.setIdDocumento(maxDoc(conn, becas.getIdGabinete(), becas.getIdAplicacion())); 
 			int insert = createDocumento(conn, becas,st);
 				becas.setIdVersion( 1);  ;
 				version.createVersion(conn, becas, st);
@@ -68,15 +68,16 @@ public class DocumentoDao {
 		}
 	
 	
-public int maxDoc(Connection conn, int idExpediente) throws SQLException {
+public int maxDoc(Connection conn, int idExpediente, int idAplicacion) throws SQLException {
 		
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		int idDocumento = -1;
-		String query ="select max(cd_documento) as documento from tlms033_documento  where cd_expediente = ? ";
+		String query ="select max(cd_documento) as documento from tlms033_documento  where cd_expediente = ?  and cd_aplicacion = ?";
 		try{
 		ps = conn.prepareStatement(query);
 		ps.setInt(1, idExpediente);
+		ps.setInt(2, idAplicacion);
 		rs = ps.executeQuery();
 		if(rs.next()){
 			idDocumento = rs.getInt("documento") + 1;

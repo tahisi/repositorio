@@ -31,7 +31,7 @@ public class reporteBEyG {
 		String nombre_archivo = "";
 //		nombre_archivo=args[0]
 //		nombre_archivo = "DM_BEYG_TEXSAS_20170224.txt";
-		nombre_archivo ="DM_BEYG_TEXSAS-20170906.txt";
+		nombre_archivo ="DM_BEYG_TEXSAS-20171013.txt";
 		String ruta_base = "E:/BBVA/BEyG/ReporteBEyG/";
 		log.info("Lee Archivo " + nombre_archivo);
 		

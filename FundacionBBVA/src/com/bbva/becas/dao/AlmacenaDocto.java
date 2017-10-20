@@ -123,7 +123,7 @@ public class AlmacenaDocto extends DataSourceManager {
 	}
 
 public static Connection Buscaconexion() throws Exception{		
-		
+		System.out.println("Conexion D ------ ");
 		Connection conn = null; 
 		Class.forName("oracle.jdbc.OracleDriver") ;
 

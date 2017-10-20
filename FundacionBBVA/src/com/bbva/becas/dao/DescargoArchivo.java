@@ -19,7 +19,7 @@ import org.json.JSONObject;
 import com.bbva.becas.parametros.ParametrosBecas;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.bancomer.pia.dsmngr.*;
+import com.bancomer.consulta.dsmngr.*;
 
 import com.syc.rig.client.RigClient;
 import com.syc.rig.client.RigClientException;
@@ -67,7 +67,7 @@ public class DescargoArchivo extends DataSourceManager {
 				OutputStream output = new ByteArrayOutputStream();
 				try{
 					System.out.println("Entrando a Buscar folio" + folio);
-					folioID = buscaID(conn, folio);
+					folioID = buscaIDDow(conn, folio);
 					System.out.println("folio en base de Datos " + folioID.get(0));
 					try{
 					System.out.println("Descargando folio " +  folioID.get(0));
@@ -139,7 +139,11 @@ public class DescargoArchivo extends DataSourceManager {
 		String ListaFolios = "";
 		JSONArray resp = new JSONArray();
 		try{
+			if (ParametrosBecas.AMBIENTE.equals("T")){
 			conn 				= AlmacenaDocto.Buscaconexion();
+			}else if(ParametrosBecas.AMBIENTE.equals("P")){
+				conn = DataSourceManager.getConnectionStatic();
+			}
 				try{
 					folioID = buscaID(conn, folio);
 					for (int i = 0 ; i<= folioID.size()-1; i++ ){
@@ -209,7 +213,35 @@ public class DescargoArchivo extends DataSourceManager {
 		 List <String> foliopag = new ArrayList<String>();
 		try{
 		int cd_aplicacion = buscaAplicacion(conn, fm.getTituloAplicacion());
-		String query = "Select cd_folio from tlms035_pagina where cd_aplicacion= ? and cd_expediente =? and cd_documento = ? and cd_version = ?";
+		String query = "Select cd_folio,nb_extension  from tlms035_pagina where cd_aplicacion= ? and cd_expediente =? and cd_documento = ? and cd_version = ?";
+		ps = conn.prepareStatement(query);
+		ps.setInt(1, cd_aplicacion);
+		ps.setInt(2, fm.getIdGabinete());
+		ps.setInt(3, fm.getIdDocumento());
+		ps.setInt(4, fm.getVersion());
+		rs = ps.executeQuery();
+		while(rs.next()){
+			foliopag.add(rs.getString("cd_folio")+"."+ rs.getString("nb_extension"));
+		}
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally {
+			if(rs!=null)rs.close();
+			if(ps!=null)ps.close();
+		}
+		return foliopag;
+		
+	}
+	
+	
+	public List<String>  buscaIDDow(Connection conn, String folio) throws SQLException{
+		Fortimax fm = new Fortimax(folio);
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		 List <String> foliopag = new ArrayList<String>();
+		try{
+		int cd_aplicacion = buscaAplicacion(conn, fm.getTituloAplicacion());
+		String query = "Select cd_folio  from tlms035_pagina where cd_aplicacion= ? and cd_expediente =? and cd_documento = ? and cd_version = ?";
 		ps = conn.prepareStatement(query);
 		ps.setInt(1, cd_aplicacion);
 		ps.setInt(2, fm.getIdGabinete());
