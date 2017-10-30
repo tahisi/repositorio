@@ -128,9 +128,9 @@ public static Connection Buscaconexion() throws Exception{
 		Class.forName("oracle.jdbc.OracleDriver") ;
 
 		
-		String cadena="jdbc:oracle:thin:@150.50.102.249:1521:lmsbdmx1";
-		String user= "zdbslms";
-		String pass= "xfirma123";
+		String cadena="jdbc:oracle:thin:@150.100.151.112:1521:LMSBPMX1";
+		String user= "ZDBSLMS";
+		String pass= "ZDBSLMSX12";
 		
 		
 		conn = DriverManager.getConnection(cadena,user, pass);

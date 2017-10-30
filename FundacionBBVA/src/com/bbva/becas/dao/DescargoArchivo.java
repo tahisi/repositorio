@@ -145,7 +145,7 @@ public class DescargoArchivo extends DataSourceManager {
 				conn = DataSourceManager.getConnectionStatic();
 			}
 				try{
-					folioID = buscaID(conn, folio);
+					folioID = buscaIDDow(conn, folio);
 					for (int i = 0 ; i<= folioID.size()-1; i++ ){
 					
 					if(i<folioID.size()-1)
