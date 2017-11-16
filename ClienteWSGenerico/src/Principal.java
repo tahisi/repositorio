@@ -31,12 +31,12 @@ public class Principal {
  
                 public static void main(String[] args) throws IOException {
                               
-                               String uri = "http://150.250.234.123:6071/fimxlive_mx_web/jaxrs/alta/";
-                              
+//                               String uri = "http://150.250.235.63:31201/fimxlive_mx_web/jaxrs/alta";
+                              String uri = "http://150.100.210.236:36015/fimxlive/jaxrs/alta/";
                                InputStreamReader isr = null;
                                BufferedReader br     = null;
-                               String nombre_archivo ="becasAdelante.txt";
-                       			String ruta_base = "E:\\BBVA\\Fundacion BBVA\\Migracion HigSales\\Metadata\\BA\\";
+                               String nombre_archivo ="becasIntegracion2.txt";
+                       			String ruta_base = "E:\\BBVA\\Fundacion BBVA\\Migracion HigSales Produccion\\BI\\";
                        			BufferedReader linea = null;
                        			String cadena;
                        			Date fechaInicio = new Date();
@@ -52,6 +52,9 @@ public class Principal {
                        			String cliente = datos [0];
                        			String cuenta = datos[1];
                        			String cr = datos[2];
+                       			if(cr.equals("")){
+                       				cr= "NA";
+                       			}
                        			String beca = datos [3];
                        			String tp_docto = datos[5];
                        			String numero_pagina = datos[6];
@@ -163,12 +166,13 @@ public class Principal {
 //                       						System.out.println(jsonObj);
                        						String folio ="";
                        						String exito = (String) jsonObj.get("exito").toString();
-                       						String error = (String) jsonObj.get("error").toString();
+//                       						String error = (String) jsonObj.get("error").toString();
                        						if(!exito.equals(""))
                        						 folio= new JSONObject(exito).getString("folioDigitalizacion");
                        						System.out.println(folio);
                        						if(ultima.equals("true")){
-                       						cadena = cadena + "|"+ folio +"|" + error;
+//                       						cadena = cadena + "|"+ folio +"|" + error;
+                       							cadena = cadena + "|"+ folio ;
                        						salidawr.write( cadena);
                        						salidawr.write("\n");
                        						}

@@ -48,7 +48,7 @@ public class DescargoArchivo extends DataSourceManager {
 				h	= new RigClient(); //PRODUCCION
 			}else if("T".equals(ParametrosBecas.AMBIENTE_ARCHIVING)){
 				try{
-				h =  new RigClient("http://150.225.99.157");
+				h =  new RigClient("http://150.100.22.50:9090");
 				}catch(Exception e){
 					System.out.println("ERROR ----------------------- ");
 					  e.printStackTrace();
@@ -82,6 +82,9 @@ public class DescargoArchivo extends DataSourceManager {
 //					exito.put(0, maps);
 					
 					}catch (RigClientException e) {
+						mapsError.put("codigo", "1");
+						mapsError.put("mensaje", "ERROR AL DESCARGAR DE ARCHIVING ");
+						mapsError.put("causa", e.getMessage());
 						e.printStackTrace();
 					}
 					
@@ -155,8 +158,8 @@ public class DescargoArchivo extends DataSourceManager {
 					}
 					
 					try{
-					
-					exito.put("url", ParametrosBecas.urlVisorArchiving[ParametrosBecas.entorno] + ListaFolios);
+					String urlvisor = urlVisorArch(conn);
+					exito.put("url", urlvisor + ListaFolios);
 					exito.put("archivo","");
 
 //					exito.put(0, maps);
@@ -260,6 +263,32 @@ public class DescargoArchivo extends DataSourceManager {
 		return foliopag;
 		
 	}
+	
+	
+	public String  urlVisorArch(Connection conn) throws SQLException{
+
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String urlArchiving = null;
+		try{
+		String query = "Select tx_valorparam  from tlms006_paramconf where tp_parametro= ? ";
+		ps = conn.prepareStatement(query);
+		ps.setString (1, "VISOR_ARCHIVING");
+		
+		rs = ps.executeQuery();
+		while(rs.next()){
+			urlArchiving = rs.getString("tx_valorparam");
+		}
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally {
+			if(rs!=null)rs.close();
+			if(ps!=null)ps.close();
+		}
+		return urlArchiving;
+		
+	}
+
 	
 	public int  buscaAplicacion(Connection conn, String aplicacion) throws SQLException{
 	

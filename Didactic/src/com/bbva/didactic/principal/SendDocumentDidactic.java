@@ -128,7 +128,7 @@ public class SendDocumentDidactic {
 				if ("P".equals(ParametrosDidactic.AMBIENTE_ARCHIVING)) {
 					h	= new RigClient(); //PRODUCCION
 				}else if("T".equals(ParametrosDidactic.AMBIENTE_ARCHIVING)){
-					h =  new RigClient("http://150.225.99.157");
+					h =  new RigClient("http://150.100.22.50:9090");
 				}
 				
 				String result  =  h.upload("didactic", metadata , archivo);

@@ -49,7 +49,7 @@ public class AlmacenaDocto extends DataSourceManager {
 			if ("P".equals(ParametrosBecas.AMBIENTE_ARCHIVING)) {
 				h	= new RigClient(); //PRODUCCION
 			}else if("T".equals(ParametrosBecas.AMBIENTE_ARCHIVING)){
-				h =  new RigClient("http://150.225.99.157");
+				h =  new RigClient("http://150.100.22.50:9090");
 			}
 			
 			String result  =  h.upload("becas", metadata , archivo);
@@ -127,12 +127,21 @@ public static Connection Buscaconexion() throws Exception{
 		Connection conn = null; 
 		Class.forName("oracle.jdbc.OracleDriver") ;
 
+//		PRODUCCION
+//		String cadena="jdbc:oracle:thin:@150.100.151.112:1521:LMSBPMX1";
+//		String user= "ZDBSLMS";
+//		String pass= "ZDBSLMSX12";
 		
-		String cadena="jdbc:oracle:thin:@150.100.151.112:1521:LMSBPMX1";
-		String user= "ZDBSLMS";
-		String pass= "ZDBSLMSX12";
+//		TEST
+//		String cadena="jdbc:oracle:thin:@150.50.102.249:1521:lmsbdmx1";
+//		String user= "zdbslms";
+//		String pass= "xfirma123";
+//		conn = DriverManager.getConnection(cadena,user, pass);
 		
 		
+		String cadena="jdbc:oracle:thin:@150.50.102.249:1521:lmsbdmx1";
+		String user= "zdbslms";
+		String pass= "xfirma123";
 		conn = DriverManager.getConnection(cadena,user, pass);
 
 		conn.setAutoCommit(false);

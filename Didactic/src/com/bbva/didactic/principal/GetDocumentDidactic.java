@@ -92,7 +92,7 @@ public class GetDocumentDidactic {
 
 		try{
 			if ("T".equals(ParametrosDidactic.AMBIENTE_ARCHIVING)) {
-				h = new RigClient("http://150.225.99.157");	//AMBIENTES PREVIOS
+				h = new RigClient("http://150.100.22.50:9090");	//AMBIENTES PREVIOS
 
 			}else if("P".equals(ParametrosDidactic.AMBIENTE_ARCHIVING)){
 				h = new RigClient();	 //PRODUCCION
