@@ -15,7 +15,7 @@ public class test {
 	public static void main (String args[]){
 		
 		String ruta  = "E:\\BBVA\\E-notario\\";
-		String nombreArchivo = "Tutorial para registrar testimonios.mp4";
+		String nombreArchivo = "Tutorial para solicitar guias en DHL.mp4";
 		String rutaC = ruta+nombreArchivo;
 		 byte[] bFile = readBytesFromFile(rutaC);
 			String   base64 = new String(Base64.encodeBase64(bFile));
@@ -28,7 +28,7 @@ public class test {
 				+ "},   "
 				+ "  	    { "
 				+ "  	      \"campo\": \"id_proceso\", " 
-				+ "  	      \"valor\": \"003\" "
+				+ "  	      \"valor\": \"001\" "
 				+ "  	    },"
 				+ "	    { "
 				+ "  	      \"campo\": \"id_doc\","
@@ -36,7 +36,7 @@ public class test {
 				+ "  	    }, "
 				+ "  	    { "
 				+ "  	      \"campo\": \"nombreDoc\", " 
-				+ "  	      \"valor\": \"registra testimonios\" "
+				+ "  	      \"valor\": \"guias dhl\" "
 				+ "  	    },"
 				+ "  	    { "
 				+ "  	      \"campo\": \"usuario\", "
@@ -48,7 +48,7 @@ public class test {
 				+ "  	    },"
 				+ "  	    { "
 				+ "  	      \"campo\": \"nombreArch\", " 
-				+ "  	      \"valor\": \"Tutorial para registrar testimonios.mp4\" "
+				+ "  	      \"valor\": \"Tutorial para solicitar guias en DHL.mp4\" "
 				+ "  	    }"
 		      	+ "  	  ], "
 
