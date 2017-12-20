@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com.ibm.etools.webservice.wscbnd:ClientBinding xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:com.ibm.etools.webservice.wscbnd="http://www.ibm.com/websphere/appserver/schemas/5.0.2/wscbnd.xmi" xmi:id="ClientBinding_1512746991879">
+  <serviceRefs xmi:id="ServiceRef_1513359810851" serviceRefLink="service/WSVisorService">
+    <portQnameBindings xmi:id="PortQnameBinding_1513359810853" portQnameLocalNameLink="WSVisorPort" />
+  </serviceRefs>
+</com.ibm.etools.webservice.wscbnd:ClientBinding>
