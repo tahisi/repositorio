@@ -1,0 +1,5 @@
+0 [main] 06-dic-2017 08:08:54 [fortimaxCB] INFO  com.bancomer.principal.reporteBEyG  - Lee Archivo DM_BEYG_TEXSAS-06122017
+15 [main] 06-dic-2017 08:08:54 [fortimaxCB] INFO  com.bancomer.principal.reporteBEyG  - E:\BBVA\BEyG\ReporteBEyG\DM_BEYG_TEXSAS-06122017 (El sistema no puede encontrar el archivo especificado.)
+0 [main] 06-dic-2017 08:09:23 [fortimaxCB] INFO  com.bancomer.principal.reporteBEyG  - Lee Archivo DM_BEYG_TEXSAS-06122017.txt
+93 [main] 06-dic-2017 08:09:23 [fortimaxCB] INFO  com.bancomer.principal.reporteBEyG  - Conectado a    :jdbc:oracle:thin:@150.100.151.213:1530:BIXBP0013
+4672212 [main] 06-dic-2017 09:27:15 [fortimaxCB] INFO  com.bancomer.principal.reporteBEyG  - Hora Fin: 09:27:15 06/12/2017

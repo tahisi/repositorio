@@ -1,0 +1,2 @@
+0 [main] 20-dic-2017 11:15:54 [fortimaxCB] INFO  com.bancomer.principal.reporteBEyG  - Lee Archivo DM_BEYG_TEXSAS-20122017.txt
+98 [main] 20-dic-2017 11:15:54 [fortimaxCB] INFO  com.bancomer.principal.reporteBEyG  - Conectado a    :jdbc:oracle:thin:@150.100.151.213:1530:BIXBP0013
