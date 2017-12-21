@@ -65,8 +65,8 @@ function imageManager(type) {
 			imgHeight.value = 0;
 			rotate.value = 0;
 			imgIndex.value = "0";
-			href = href.substring(0, idxPosIni) + "0";
-			window.location.href = href;
+//			href = href.substring(0, idxPosIni) + "0";
+			window.location.href = parent.listFrame.document.getElementById("imagen0").getElementsByTagName('a')[0].getAttribute("href");
 			updateImagesList(imgList, 0);
 			break;
 		case 8: // Anterior
@@ -74,10 +74,10 @@ function imageManager(type) {
 			imgHeight.value = 0;
 			rotate.value = 0;
 			outIndex = ((indexVal - 1) < 0)? 0: indexVal - 1;
-			href = href.substring(0, idxPosIni) + outIndex;
+//			href = href.substring(0, idxPosIni) + outIndex;
 			imgIndex.value = outIndex;
 			if (outIndex != indexVal) {
-				window.location.href = href;
+				window.location.href = parent.listFrame.document.getElementById("imagen"+outIndex).getElementsByTagName('a')[0].getAttribute("href");
 				updateImagesList(imgList, outIndex);
 			}
 			break;
@@ -89,7 +89,7 @@ function imageManager(type) {
 			href = href.substring(0, idxPosIni) + outIndex;
 			imgIndex.value = outIndex;
 			if (outIndex != indexVal) {
-				window.location.href = href;
+				window.location.href = parent.listFrame.document.getElementById("imagen"+outIndex).getElementsByTagName('a')[0].getAttribute("href");
 				updateImagesList(imgList, outIndex);
 			}
 			break;
@@ -98,7 +98,7 @@ function imageManager(type) {
 			imgHeight.value = 0;
 			rotate.value = 0;
 			href = href.substring(0, idxPosIni) + imgMaxVal;
-			window.location.href = href;
+			window.location.href = parent.listFrame.document.getElementById("imagen"+imgMaxVal).getElementsByTagName('a')[0].getAttribute("href");
 			imgIndex.value = imgMaxVal;
 			updateImagesList(imgList, imgMaxVal);
 			break;
