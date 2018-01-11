@@ -24,7 +24,9 @@ public class WSVisorServiceLocator extends com.ibm.ws.webservices.multiprotocol.
 	}
 
 	// Utilizar para obtener la clase de proxy para WSVisorPort
-	private final java.lang.String WSVisorPort_address = "http://150.250.234.123:37041/visorlive_mx_web/WSVisorPort?wsdl";
+//	private final java.lang.String WSVisorPort_address = "http://150.250.234.123:37041/visorlive_mx_web/WSVisorPort?wsdl";
+//	private final java.lang.String WSVisorPort_address = "http://localhost:9081/consultasaso_mx_web/WSVisorPort?wsdl";
+	private final java.lang.String WSVisorPort_address ="http://150.100.210.22:36061/fimxvisor/WSVisorPort?wsdl";
 
 	public java.lang.String getWSVisorPortAddress() {
 		if (context.getOverriddingEndpointURIs() == null) {

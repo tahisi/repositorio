@@ -78,7 +78,7 @@ public class DigitalizacionServiceCliente {
 				+ "  	  \"atributos\": [ "
 				+ "  	    { "
 				+ "  	      \"campo\": \"tipoOperacion\", "
-				+ "  	      \"valor\": \"mailApiEmpresarial\" "
+				+ "  	      \"valor\": \"OnboTemp\" "
 				+ "},   "
 				+ "  	    { "
 				+ "  	      \"campo\": \"contrato\", " 
