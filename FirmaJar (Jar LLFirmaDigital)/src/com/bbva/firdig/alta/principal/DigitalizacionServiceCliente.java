@@ -51,7 +51,7 @@ public class DigitalizacionServiceCliente {
 		error.put("mensaje", "Error");
 		respuestaASO.put("exito", exito);
 		respuestaASO.put("error", error);
-	}else if(respuesta.contains("parametro")){
+	}else if(respuesta.contains("status='false'>")){
 		error.put("codigo", "002");
 		error.put("causa", respuesta);
 		error.put("mensaje", "Error");
@@ -78,30 +78,58 @@ public class DigitalizacionServiceCliente {
 				+ "  	  \"atributos\": [ "
 				+ "  	    { "
 				+ "  	      \"campo\": \"tipoOperacion\", "
-				+ "  	      \"valor\": \"OnboTemp\" "
+				+ "  	      \"valor\": \"cerAuto\" "
 				+ "},   "
 				+ "  	    { "
-				+ "  	      \"campo\": \"contrato\", " 
-				+ "  	      \"valor\": \"1234567891\" "
+				+ "  	      \"campo\": \"canal\", " 
+				+ "  	      \"valor\": \"BNET\" "
 				+ "  	    },"
 				+ "	    { "
-				+ "  	      \"campo\": \"claveAlfanumerica\","
-				+ "  	      \"valor\": \"76688745367668\" "
+				+ "  	      \"campo\": \"tipoApp\","
+				+ "  	      \"valor\": \"CA\" "
 				+ "  	    }, "
 				+ "  	    { "
-				+ "  	      \"campo\": \"numeroCuenta\", " 
-				+ "  	      \"valor\": \"441112345\" "
+				+ "  	      \"campo\": \"numeroCliente\", " 
+				+ "  	      \"valor\": \"D0080752\" "
 				+ "  	    },"
 				+ "  	    { "
-				+ "  	      \"campo\": \"correoDestinatario\", " 
-				+ "  	      \"valor\": \"tahis.gaby10@gmail.com\" "
+				+ "  	      \"campo\": \"nombreCliente\", " 
+				+ "  	      \"valor\": \"ALCANTARA REYES DAMIAN\" "
 				+ "  	    },"
 				+ "  	    { "
-				+ "  	      \"campo\": \"razonSocial\", " 
-				+ "  	      \"valor\": \"F\" "
+				+ "  	      \"campo\": \"numeroContrato\", " 
+				+ "  	      \"valor\": \"000000\" "
 				+ "  	    },"
 				+ "  	    { "
-				+ "  	      \"campo\": \"representanteLegal\", " 
+				+ "  	      \"campo\": \"cveDocumento\", " 
+				+ "  	      \"valor\": \"001\" "
+				+ "  	    },"
+				+ "  	    { "
+				+ "  	      \"campo\": \"descripcion\", " 
+				+ "  	      \"valor\": \"CREDENCIAL ELECTOR\" "
+				+ "  	    },"
+				+ "  	    { "
+				+ "  	      \"campo\": \"sucOperativa\", " 
+				+ "  	      \"valor\": \"3307\" "
+				+ "  	    },"
+				+ "  	    { "
+				+ "  	      \"campo\": \"actualiza\", " 
+				+ "  	      \"valor\": \"false\" "
+				+ "  	    },"
+				+ "  	    { "
+				+ "  	      \"campo\": \"usuario\", " 
+				+ "  	      \"valor\": \"ADMINF\" "
+				+ "  	    },"
+				+ "  	    { "
+				+ "  	      \"campo\": \"tipoMatriz\", " 
+				+ "  	      \"valor\": \"PR01\" "
+				+ "  	    },"
+				+ "  	    { "
+				+ "  	      \"campo\": \"cveProducto\", " 
+				+ "  	      \"valor\": \"1\" "
+				+ "  	    },"
+				+ "  	    { "
+				+ "  	      \"campo\": \"secReferencia\", " 
 				+ "  	      \"valor\": \"1\" "
 				+ "  	    }"
 		      	+ "  	  ], "
@@ -111,7 +139,9 @@ public class DigitalizacionServiceCliente {
 		
 //		System.out.println(cadena);
 		JSONObject respuesta = null;
+		System.out.println(cadena);
 		JSONObject jsonObj = new JSONObject(cadena);
+		
 		respuesta=  addFile(jsonObj);
 //		respuesta = sendFileOI(jsonObj);
 		System.out.println(respuesta);
