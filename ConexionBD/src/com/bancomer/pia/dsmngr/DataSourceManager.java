@@ -12,7 +12,7 @@ import javax.sql.DataSource;
 import com.bancomer.pia.jndi.TraeJndi;
 import com.bancomer.pia.utils.Configuracion;
 import com.bancomer.pia.utils.ConstantesBD;
-
+//
 public abstract class DataSourceManager extends Thread {
 	
 	private static DataSource ds         = null;
