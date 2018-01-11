@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?><xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://ws.bancomer.syc.com/" targetNamespace="http://ws.bancomer.syc.com/" version="1.0">
+
+  <xs:element name="enviaExpediente" type="tns:enviaExpediente"/>
+
+  <xs:element name="enviaExpedienteResponse" type="tns:enviaExpedienteResponse"/>
+
+  <xs:element name="getDocumento" type="tns:getDocumento"/>
+
+  <xs:element name="getDocumentoResponse" type="tns:getDocumentoResponse"/>
+
+  <xs:complexType name="getDocumento">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="id" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getDocumentoResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" nillable="true" type="xs:base64Binary"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="enviaExpediente">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DocumentoBean" type="tns:documentoBean"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="documentoBean">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="archivo" type="xs:base64Binary"/>
+      <xs:element minOccurs="0" name="cve_docto" type="xs:string"/>
+      <xs:element minOccurs="0" name="descripcion" type="xs:string"/>
+      <xs:element minOccurs="0" name="extension" type="xs:string"/>
+      <xs:element minOccurs="0" name="folio_aclaracion" type="xs:string"/>
+      <xs:element minOccurs="0" name="nb_archivo" type="xs:string"/>
+      <xs:element minOccurs="0" name="nb_documento" type="xs:string"/>
+      <xs:element minOccurs="0" name="nu_cliente" type="xs:string"/>
+      <xs:element minOccurs="0" name="titulo_aplicacion" type="xs:string"/>
+      <xs:element minOccurs="0" name="usuario" type="xs:string"/>
+      <xs:element name="version" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="enviaExpedienteResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:wsEnviaExpediente"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="wsEnviaExpediente">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="codigo" type="xs:string"/>
+      <xs:element minOccurs="0" name="error" type="xs:string"/>
+      <xs:element minOccurs="0" name="respuesta" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
